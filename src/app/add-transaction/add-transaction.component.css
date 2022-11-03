@@ -1,0 +1,22 @@
+
+.error{
+    color: red;
+}
+.success{
+    color: green;
+}
+.message-container{
+    max-width: 500px;
+    margin: 1rem auto;
+}
+.submit{
+    margin-top: 10px;
+}
+@media screen and (max-width: 760px) {
+  .submit{
+      margin-top: 0px;
+  }
+}
+.sub{
+    margin-left: 15px;
+}

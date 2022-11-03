@@ -1,0 +1,36 @@
+<mat-sidenav-container>
+	<mat-sidenav #sidenav mode="over">
+		<label>XYZ Bank</label>
+		<hr />
+		<nav>
+			<a *ngIf="!isUserLogin" routerLink="/register" (click)="clickHandler()"
+				routerLinkActive="active">Register</a>
+			<a *ngIf="!isUserLogin" routerLink="/login" (click)="clickHandler()" routerLinkActive="active">Login</a>
+			<a *ngIf="isAdmin || isUserLogin" routerLink="/transactions" routerLinkActive="active">Transactions</a>
+			<a *ngIf="isAdmin" routerLink="/userMgmt" (click)="clickHandler()" routerLinkActive="active">User
+				Management</a>
+			<a *ngIf="isAdmin || isUserLogin" routerLink="/profile" routerLinkActive="active">View profile</a>
+			<a *ngIf="isUserLogin" href="#" (click)="logout()">Logout</a>
+		</nav>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<mat-toolbar color="primary">
+			<header>
+				<mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+				<img class="logo" src="assets/bank_logo.png" alt="logo">
+				<label class="cname">XYZ Bank</label>
+				<nav>
+					<a *ngIf="!isUserLogin" routerLink="/register" (click)="clickHandler()"
+						routerLinkActive="active">Register</a>
+					<a *ngIf="!isUserLogin" routerLink="/login" (click)="clickHandler()"
+						routerLinkActive="active">Login</a>
+						<a *ngIf="isAdmin || isUserLogin" routerLink="/transactions" routerLinkActive="active">Transactions</a>
+					<a *ngIf="isAdmin" routerLink="/userMgmt" (click)="clickHandler()" routerLinkActive="active">User
+						Management</a>
+					<a *ngIf="isAdmin || isUserLogin" routerLink="/profile" routerLinkActive="active">View profile</a>
+					<a *ngIf="isUserLogin" href="#" (click)="logout()">Logout</a>
+				</nav>
+			</header>
+		</mat-toolbar>
+	</mat-sidenav-content>
+</mat-sidenav-container>

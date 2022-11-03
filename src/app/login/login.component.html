@@ -1,0 +1,16 @@
+<app-home></app-home>
+<div class="login-box">
+    <h2 class="text-center">Login</h2>
+    <p class="error">{{errorMsg}}</p>
+    <div class="form-col">
+    <label>User name :</label>
+    <input type="text" name="userName" [(ngModel)]="userName">
+</div>
+<div class="form-col">
+    <label>Password :</label> 
+     <input type="text" name="password" [(ngModel)]="password">
+</div>
+<div class="form-actions">
+    <button type="button" (click)="handleLogin()" class="text-center btn-primary">Login</button>
+</div>
+</div>

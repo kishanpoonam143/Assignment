@@ -1,0 +1,130 @@
+<div class="container">
+    <div class="message-container">
+        <div *ngIf="errorMsg" class="alert alert-warning">
+            <p class="error">{{errorMsg}}</p>
+        </div>
+        <div *ngIf="succMsg" class="alert alert-success">
+            <p class="success">{{succMsg}}</p>
+        </div>
+    </div>
+
+    <label class="mt-5">User Type</label>
+    <div class="row">
+        <div class="form-check col-sm-6 col-md-3">
+            <input type="radio" name="type" value="New" (click)="handleRadioClick('new')" [(ngModel)]="type">
+            <label class="ml-2">New</label>
+        </div>
+        <div class="form-check col-sm-6 col-md-3">
+            <input type="radio" name="type" value="Existing" (click)="handleRadioClick('exist')" [(ngModel)]="type">
+            <label class="ml-2"> Existing</label>
+        </div>
+    </div>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6 form-group" *ngIf="!disableCustomerNumber">
+                <label>Customer number</label>
+                <input type="text" class="form-control" placeholder="Enter customer number"
+                    formControlName="customerNumber" (keydown.space)="$event.preventDefault()"
+                    (blur)="populateCustomerData()" />
+                <div class="error"
+                    *ngIf="addForm.controls['customerNumber'].touched && addForm.controls['customerNumber'].invalid">
+                    <span *ngIf="addForm.controls['customerNumber'].errors.required">Customer Number is required.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Customer name</label>
+                <input type="text" class="form-control" placeholder="Enter customer name" formControlName="customerName"
+                    (keydown.space)="$event.preventDefault()" />
+                <div class="error"
+                    *ngIf="addForm.controls['customerName'].touched && addForm.controls['customerName'].invalid">
+                    <span *ngIf="addForm.controls['customerName'].errors.required">Customer Name is
+                        required.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Region</label>
+                <select class="form-control" formControlName="region" (change)="regionHandler($event)">
+                    <option value="" selected="selected">Select region</option>
+                    <option value="Port Louis">Port Louis</option>
+                    <option value="Curepipe">Curepipe</option>
+                    <option value="Vacoas">Vacoas</option>
+                    <option value="Port Mathurin">Port Mathurin</option>
+                </select>
+                <div class="error" *ngIf="addForm.controls['region'].touched && addForm.controls['region'].invalid">
+                    <span *ngIf="addForm.controls['region'].errors.required">Region is
+                        required.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group" *ngIf="!hideAddress">
+                <label>Address</label>
+                <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
+                <div class="error"
+                    *ngIf="addForm.controls['address'].touched && addForm.controls['address'].invalid">
+                    <span *ngIf="addForm.controls['address'].errors.required">Address is
+                        required.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Customer phone number</label>
+                <input class="form-control" matInput placeholder="Enter customer number"
+                    formControlName="customerPhoneNumber" (keydown.space)="$event.preventDefault()" />
+                <div class="error"
+                    *ngIf="addForm.controls['customerPhoneNumber'].touched && addForm.controls['customerPhoneNumber'].invalid">
+                    <span *ngIf="addForm.controls['customerPhoneNumber'].errors.required">Phone Number is
+                        required.</span>
+                    <span *ngIf="addForm.controls['customerPhoneNumber'].errors.pattern">Enter only numbers.</span>
+                    <span *ngIf="addForm.controls['customerPhoneNumber'].errors.maxlength">Enter only 10 digits.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Currency</label>
+                <select class="form-control" formControlName="currency">
+                    <option value="" selected="selected">Select Currency</option>
+                    <option value="AED">AED</option>
+                    <option value="EUR">EUR</option>
+                    <option value="CHF">CHF</option>
+                    <option value="USD">USD</option>
+                </select>
+                <div class="error" *ngIf="addForm.controls['currency'].touched && addForm.controls['currency'].invalid">
+                    <span *ngIf="addForm.controls['currency'].errors.required">Currency is
+                        required.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Amount</label>
+                <input class="form-control" matInput placeholder="Enter transfer amount" formControlName="amount"
+                    (keydown.space)="$event.preventDefault()" />
+                <div class="error" *ngIf="addForm.controls['amount'].touched && addForm.controls['amount'].invalid">
+                    <span *ngIf="addForm.controls['amount'].errors.required">Amount is
+                        required.</span>
+                    <span *ngIf="addForm.controls['amount'].errors.pattern">Enter only numbers.</span>
+                    <span *ngIf="addForm.controls['amount'].errors.maxlength">Enter only 10 digits.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Beneficiary Bank</label>
+                <input class="form-control" matInput placeholder="Enter bank name" formControlName="bankName"
+                    (keydown.space)="$event.preventDefault()" />
+                <div class="error" *ngIf="addForm.controls['bankName'].touched && addForm.controls['bankName'].invalid">
+                    <span *ngIf="addForm.controls['bankName'].errors.required">Bank Name is
+                        required.</span>
+                    <span *ngIf="addForm.controls['bankName'].errors.maxlength">Enter only 10 digits.</span>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Account Number</label>
+                <input class="form-control" matInput placeholder="Enter account number" formControlName="accountNumber"
+                    (keydown.space)="$event.preventDefault()" />
+                <div class="error" *ngIf="addForm.controls['accountNumber'].touched && addForm.controls['accountNumber'].invalid">
+                    <span *ngIf="addForm.controls['accountNumber'].errors.required">Account Number is
+                        required.</span>
+                    <span *ngIf="addForm.controls['accountNumber'].errors.pattern">Enter only numbers.</span>
+                    <span *ngIf="addForm.controls['accountNumber'].errors.maxlength">Enter only 15 digits.</span>
+                </div>
+            </div>
+            <div class="sub" [ngClass]="{submit: disableCustomerNumber == false}">
+                <button [disabled]="addForm.invalid" class="btn mt-3 btn-primary">Send Money</button>
+            </div>
+        </div>
+    </form>
+</div>

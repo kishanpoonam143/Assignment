@@ -1,0 +1,12 @@
+.btn-view{
+    height: 50px;
+    border: 1px solid #DDD;
+    width: 250px;
+}
+.highlight{
+    background-color : steelblue;
+  
+}
+.revert{
+    background-color: none;
+}

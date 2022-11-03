@@ -1,0 +1,22 @@
+<app-home></app-home>
+<div class="container pt-4 ">
+    <span class="error" *ngIf="errorMsg">{{errorMsg}}</span>
+    <span class="success" *ngIf="succMsg">{{succMsg}}</span>
+    <table class="border bordered table">
+        <tr>
+            <th>User Name</th>
+            <th>Add Transaction Access</th>
+            <th>View Transaction Access</th>
+        </tr>
+        <tr *ngFor="let item of users">
+            <td>{{item.userName}}</td>
+            <td>
+                <input type="checkbox" [checked]="item.addTransactionAccess" (change)="handleAdd(item, $event)">
+            </td>
+            <td>
+                <input type="checkbox" [checked]="item.viewTransactionAccess" (change)="handleView(item, $event)">
+            </td>
+        </tr>
+    </table>
+    <button type="button" (click)="updateAccess()" class="btn btn-primary">Update Permissions</button>
+</div>

@@ -1,0 +1,15 @@
+<app-home></app-home>
+<div class="container pt-4 text-center">
+    <div *ngIf="isUserLogin">
+        <button class="btn btn-view" [ngClass]="{'highlight' : showAddTransaction, 'revert': !showAddTransaction}" *ngIf="addTransactionAccess" (click)="handleAddTransaction()">Add
+            Transaction</button>
+        <button class="btn btn-view" [ngClass]="{'highlight' : !showAddTransaction, 'revert': showAddTransaction}" *ngIf="viewTransactionAccess" (click)="handleViewTransactions()">View
+            Transactions</button>
+    </div>
+</div>
+<div *ngIf="addTransactionAccess && showAddTransaction">
+    <app-add-transaction></app-add-transaction>
+</div>
+<div *ngIf="viewTransactionAccess && !showAddTransaction">
+    <app-view-transactions></app-view-transactions>
+</div>
